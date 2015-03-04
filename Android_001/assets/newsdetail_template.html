@@ -1,0 +1,23 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,user-scalable=no">
+	<link href="__CSS_PLACEHOLDER__" rel="stylesheet">
+</head>
+<body>
+	__BODY_PLACEHOLDER__
+<script>
+(function(){
+var links = document.querySelectorAll('a[href^="http://daily.zhihu.com/story/"]');
+var length = links.length;
+if (length) {
+for (var i = 0; i < length; ++i) {
+var link = links[i];
+link.href = link.href.replace('http://daily.zhihu.com/story/', 'zhihudaily://story/');
+}
+}
+})()
+</script>
+</body>
+</html>

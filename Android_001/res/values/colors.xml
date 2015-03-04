@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    
+    <color name="theme_color">#20B2AA</color>
+    
+    <color name="page_background">#eeeeee</color>
+    
+    <color name="txt_gray">#888888</color>
+    
+    <color name="listview_divider">#eeeeee</color>
+    <color name="listview_item_selected">#20B1A0</color>
+
+</resources>
