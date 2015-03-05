@@ -36,11 +36,11 @@ public class HackyViewPager extends ViewPager {
 		try {
 			return super.onInterceptTouchEvent(ev);
 		} catch (IllegalArgumentException e) {
-			// 涓嶇悊浼?
+			// 不理会
 			Log.e(TAG, "hacky viewpager error1");
 			return false;
 		} catch (ArrayIndexOutOfBoundsException e) {
-			// 涓嶇悊浼?
+			// 不理会
 			Log.e(TAG, "hacky viewpager error2");
 			return false;
 		}

@@ -22,15 +22,19 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.NetworkImageView;
 
 @SuppressLint({ "SetJavaScriptEnabled" })
 public class NewsDetailActivity extends Activity {
 	private NewsService newsService = new NewsService();
 	private WebView webView;
 	private Story story;
+	private NetworkImageView coverImageView;
+	private TextView textView;
 
 	@SuppressLint("JavascriptInterface")
 	@Override
@@ -38,13 +42,16 @@ public class NewsDetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_news_detail);
 
+		Intent intent = getIntent();
+		Bundle bundle = intent.getExtras();
+		story = (Story) bundle.get("story");
+
 		webView = (WebView) findViewById(R.id.webview_news_detail);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.setWebViewClient(new MyWebViewClient());
 
-		Intent intent = getIntent();
-		Bundle bundle = intent.getExtras();
-		story = (Story) bundle.get("story");
+		coverImageView = (NetworkImageView) findViewById(R.id.coverImage);
+		textView = (TextView) findViewById(R.id.title);
 
 		getNewsDetail(story.id);
 	}
@@ -76,6 +83,11 @@ public class NewsDetailActivity extends Activity {
 						htmlData = htmlData.replace("__CSS_PLACEHOLDER__",
 								t.css.get(0));
 					}
+					htmlData = htmlData.replace(
+							"<div class=\"img-place-holder\"></div>", "");
+					textView.setText(t.title);
+					coverImageView.setImageUrl(t.image, VolleyApplication
+							.getInstance().getImageLoader());
 					webView.loadData(htmlData, "text/html", "utf-8");
 				}
 			}
@@ -137,13 +149,12 @@ public class NewsDetailActivity extends Activity {
 				int position = 1;
 				ArrayList<String> images = new ArrayList<String>();
 				if (imageParamsStrings.length > 1) {
-					for (int i = 1; i < imageParamsStrings.length; i++) {
+					for (int i = 2; i < imageParamsStrings.length; i++) {
 						images.add(imageParamsStrings[i]);
-						
+
 						// 为何js中j计数无效，js调用java无效，改用配置的图片地址格式，以达到效果
 						if (imageParamsStrings[0].equals(imageParamsStrings[i])) {
-							position = i-1;
-							Log.d("output","postion:"+position);
+							position = i - 2;
 						}
 					}
 				}
