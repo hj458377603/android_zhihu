@@ -85,9 +85,9 @@ public class NewsDetailActivity extends Activity {
 					}
 					htmlData = htmlData.replace(
 							"<div class=\"img-place-holder\"></div>", "");
-					textView.setText(t.title);
 					coverImageView.setImageUrl(t.image, VolleyApplication
 							.getInstance().getImageLoader());
+					textView.setText(t.title);
 					webView.loadData(htmlData, "text/html", "utf-8");
 				}
 			}
